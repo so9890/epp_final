@@ -14,8 +14,13 @@ from bld.project_paths import project_paths_join as ppj
 
 con_WC= pd.read_pickle(ppj("OUT_DATA_CON_PREP", "WC_con"))
 con_BLS = pd.read_pickle(ppj("OUT_DATA_CON_PREP", "BLS_con"))
+
 d_CPI= pd.read_pickle(ppj("OUT_DATA_CPI_CLEARED", "CPI_for_con"))
 
+#con_WC = pd.read_pickle("../../../bld/out/data/Concordance_prepared/WC_con")
+#con_BLS = pd.read_pickle("../../../bld/out/data/Concordance_prepared/BLS_con")
+
+#d_CPI= pd.read_pickle("../../../bld/out/data/CPI_prepared/CPI_for_con")
 #------------------------------------------------------------------------
 ## Merge
 #------------------------------------------------------------------------
@@ -63,7 +68,7 @@ for s in dic:
     ## Check what CPIs from concordance file are not in CPI file
     ## match, if possible to respective expenditure class.
     #------------------------------------------------------------------------
-    not_merged_in_con=d_CPI_test[['source', 'item_id_y','UCC']] #item_id_y is from con file
+    not_merged_in_con=d_CPI_test[['source', 'item_id','UCC']] #item_id is from con file
     
     not_merged_in_con=not_merged_in_con[not_merged_in_con.source=='right_only']
     # there are 151 non_merged UCCs, they can be matched to the expenditure class
@@ -71,7 +76,7 @@ for s in dic:
     # derive expenditure class
     not_merged_in_con['item_id_new']=""
     for i in range(0,len(not_merged_in_con)):
-        not_merged_in_con['item_id_new'].iloc[i]=not_merged_in_con.item_id_y.iloc[i][:2]
+        not_merged_in_con['item_id_new'].iloc[i]=not_merged_in_con.item_id.iloc[i][:2]
       
     con_exp_class=not_merged_in_con[['item_id_new', 'UCC']]
     con_exp_class.columns=['item_id_II', 'UCC']

@@ -161,7 +161,7 @@ dups_con=unique_SID[unique_SID.concordance_id.duplicated(keep= False)].sort_valu
 ## merge back to main data set
 #------------------------------------------------------------------------
         
-data=data.merge(unique_SID[['series_id', 'item_id',
+data=data.merge(unique_SID[['series_id',
        'concordance_id']], left_on= 'series_id', right_on= 'series_id', how= 'left', validate="m:1")
 
 # only keep items in price data set that have a concordance_id
