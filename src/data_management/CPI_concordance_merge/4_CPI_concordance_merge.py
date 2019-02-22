@@ -17,10 +17,6 @@ con_BLS = pd.read_pickle(ppj("OUT_DATA_CON_PREP", "BLS_con"))
 
 d_CPI= pd.read_pickle(ppj("OUT_DATA_CPI_CLEARED", "CPI_for_con"))
 
-#con_WC = pd.read_pickle("../../../bld/out/data/Concordance_prepared/WC_con")
-#con_BLS = pd.read_pickle("../../../bld/out/data/Concordance_prepared/BLS_con")
-
-#d_CPI= pd.read_pickle("../../../bld/out/data/CPI_prepared/CPI_for_con")
 #------------------------------------------------------------------------
 ## Merge
 #------------------------------------------------------------------------
