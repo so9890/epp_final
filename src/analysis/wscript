@@ -1,23 +1,24 @@
 #! python
 
 
-#def build(ctx):
-#
- #   for model in 'baseline', 'max_moves_2':
+def build(ctx):
+
 
         # Illustrate use of run_py_script with automatic model specification.
-#        ctx(
- #           features='run_py_script',
-  #          source='schelling.py',
-   #         deps=[
-    #            ctx.path_to(ctx, 'OUT_DATA', #'initial_locations.csv'),
-                #ctx.path_to(ctx, 'IN_MODEL_CODE', 'agent.py'),
-                #ctx.path_to(ctx, 'IN_MODEL_SPECS', #'{}.json'.format(model)),
- #           ],
-  #          target=[
-   #             ctx.path_to(ctx, 'OUT_ANALYSIS', 'schelling_{}.pickle'.format(model)),
-#                ctx.path_to(ctx, 'OUT_ANALYSIS', 'log', #'schelling_{}.log'.format(model))
- #           ],
-  #          append=model,
-   #         name='schelling_{}'.format(model)
-    #    )
+        ctx(
+            features='run_py_script',
+            source='8_evolution_time_comparison.py',
+            deps=[
+                ctx.path_to(ctx, 'IN_DATA_GRAPH', 'agg_cpi_exp_series_p10' ),
+            	ctx.path_to(ctx, 'IN_DATA_GRAPH', 'agg_cpi_exp_series_p90' ),
+		ctx.path_to(ctx, 'IN_DATA_GRAPH', 'exp_series_p10' ),
+		ctx.path_to(ctx, 'IN_DATA_GRAPH', 'exp_series_p90' ),
+		],
+            target=[
+                ctx.path_to(ctx, 'OUT_ANALYSIS', 'comparison_exp_p1-p10_agg'),
+                ctx.path_to(ctx, 'OUT_ANALYSIS', 'comparison_exp_p90-p100_agg'),
+                ctx.path_to(ctx, 'OUT_ANALYSIS', 'exp_p1-p10_agg_rich_vs_poor'),
+                ctx.path_to(ctx, 'OUT_ANALYSIS', 'exp_p1-p10_rich_vs_poor'),
+            ],
+            name='comparison'
+        )
