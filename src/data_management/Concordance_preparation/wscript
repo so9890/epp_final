@@ -1,0 +1,22 @@
+#! python
+
+
+def build(ctx):
+    
+    for con in 'BLS', 'WC':
+
+        # Illustrate simple use of run_py_script
+        ctx(
+            features='run_py_script',
+            source='3_{}_concordance_preparation.py'.format(con),    
+            deps=[
+                  ctx.path_to(ctx,"OUT_DATA_CPI_CLEARED", "CPI_for_con"),
+	          ctx.path_to(ctx,'IN_DATA_CON', 'concordance_{}.xlsx'.format(con)),
+
+                 ],
+            target=[
+               ctx.path_to(ctx,"OUT_DATA_CON_PREP", "{}_con".format(con)),
+
+               ],
+            name= '{}_con'.format(con)
+        )

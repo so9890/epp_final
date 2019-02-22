@@ -1,0 +1,17 @@
+#! python
+
+
+def build(ctx):
+
+    # Illustrate simple use of run_py_script
+    ctx(
+        features='run_py_script',
+        source='5_CEX_CPI_merge.py',
+        deps=[
+              ctx.path_to(ctx,"OUT_DATA_WEIGHTS_AND_EXPENDITURES","12_1995_weights_and_expenditures"),
+              ctx.path_to(ctx,"OUT_DATA_CPI_CON", "CPI_m_BLS"),
+              ctx.path_to(ctx,"OUT_DATA_CPI_CON", "CPI_m_WC")
+             ],
+        target=ctx.path_to(ctx,"OUT_DATA_CEX_CPI_MERGED", "CEX_CPI_12_1995"),
+         name= '12_1995_CEX_CPI'
+    )

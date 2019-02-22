@@ -1,0 +1,17 @@
+#! python
+
+
+def build(ctx):
+
+    # Illustrate simple use of run_py_script
+    ctx(
+        features='run_py_script',
+        source='2_CEX_DATA_expenditures.py',
+        deps=[
+              ctx.path_to(ctx,"IN_DATA_CEX","mtbi961x.csv"),
+              ctx.path_to(ctx,'OUT_DATA_PERCENTILES','12_1995_percentiles'),
+              ctx.path_to(ctx,"IN_DATA_CEX","CE_dictionary.xlsx")
+             ],
+        target=ctx.path_to(ctx,"OUT_DATA_WEIGHTS_AND_EXPENDITURES","12_1995_weights_and_expenditures"),
+         name= '12_1995_weight_expenditures'
+    )

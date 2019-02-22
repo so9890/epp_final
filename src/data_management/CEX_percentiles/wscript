@@ -1,0 +1,20 @@
+#! python
+
+
+def build(ctx):
+
+    # Illustrate simple use of run_py_script
+    ctx(
+        features='run_py_script',
+        source='1_CEX_DATA_percentiles.py',
+        deps=[
+               ctx.path_to(ctx,'IN_DATA_CEX','itbi961x.csv'),
+               ctx.path_to(ctx,'IN_DATA_CEX','fmli961x.csv')
+
+             ],
+        target=ctx.path_to(ctx,'OUT_DATA_PERCENTILES','12_1995_percentiles'),
+        name='d_12_1995_percentiles',
+    )
+
+
+

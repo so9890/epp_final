@@ -1,0 +1,10 @@
+#! python
+
+def build(ctx):
+    #abspath = os.path.join(ctx.path.abspath(), 'test_CEX_DATA.py')
+    ctx(
+        features='run_py_script',
+        source='test_CEX_DATA.py',
+        deps='functions.py'
+        #append=abspath
+        )

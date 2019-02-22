@@ -1,0 +1,15 @@
+#! python
+
+
+def build(ctx):
+
+    # Illustrate simple use of run_py_script
+    ctx(
+        features='run_py_script',
+        source='6_CEX_CPI_calculations.py',
+        deps=[
+              ctx.path_to(ctx,"OUT_DATA_CEX_CPI_MERGED", "CEX_CPI_12_1995"),
+             ],
+        target=ctx.path_to(ctx,"OUT_DATA_FINAL", "final_data_set_12_1995"),
+         name= '12_1995_final'
+    )

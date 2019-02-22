@@ -1,0 +1,28 @@
+#! python
+
+
+def build(ctx):
+
+    # Illustrate simple use of run_py_script
+    ctx(
+        features='run_py_script',
+        source='3_CPI_DATA_preparation.py',
+        deps=[
+              ctx.path_to(ctx,'IN_DATA_CPI','food_and_beverages.xlsx'),
+              ctx.path_to(ctx,'IN_DATA_CPI','USApparel.xlsx'),
+              ctx.path_to(ctx,'IN_DATA_CPI','USCommoditiesServicesSpecial.xlsx'),
+              ctx.path_to(ctx,'IN_DATA_CPI','USEducationandCommunication.xlsx'),
+              ctx.path_to(ctx,'IN_DATA_CPI','UShousing.xlsx'),
+              ctx.path_to(ctx,'IN_DATA_CPI','USMedical.xlsx'),
+              ctx.path_to(ctx,'IN_DATA_CPI','USOtherGoodsAndServices.xlsx'),
+              ctx.path_to(ctx,'IN_DATA_CPI','USRecreation.xlsx'),
+              ctx.path_to(ctx,'IN_DATA_CPI','USTransportation.xlsx'),
+              ctx.path_to(ctx,'IN_DATA_CON','ELIconcordance_NS.xls'),
+
+             ],
+        target=[
+           ctx.path_to(ctx, "OUT_DATA_CPI_CLEARED", "CPI_for_con"),
+
+           ],
+        name= ['CPI_for_con']
+    )
