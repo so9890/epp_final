@@ -34,7 +34,7 @@ def set_project_paths(ctx):
     pp["OUT_DATA_CPI_CON"] = f"{out}/out/data/CPI_and_CON"
     pp["OUT_DATA_CON_PREP"] = f"{out}/out/data/Concordance_prepared"
     pp["OUT_DATA_PERCENTILES"] =     f"{out}/out/data/CEX_percentiles"
-    pp["OUT_ANALYSIS"] = f"{out}/out/analysis"
+    #pp["OUT_ANALYSIS"] = f"{out}/out/analysis"
     pp["OUT_FINAL"] = f"{out}/out/final"
     pp["OUT_FIGURES"] = f"{out}/out/figures"
     # OUT_MODEL_SPECS is only required for using Stata with JSON and

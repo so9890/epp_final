@@ -15,10 +15,10 @@ def build(ctx):
 		ctx.path_to(ctx, 'IN_DATA_GRAPH', 'exp_series_p90' ),
 		],
             target=[
-                ctx.path_to(ctx, 'OUT_ANALYSIS', 'comparison_exp_p1-p10_agg'),
-                ctx.path_to(ctx, 'OUT_ANALYSIS', 'comparison_exp_p90-p100_agg'),
-                ctx.path_to(ctx, 'OUT_ANALYSIS', 'exp_p1-p10_agg_rich_vs_poor'),
-                ctx.path_to(ctx, 'OUT_ANALYSIS', 'exp_p1-p10_rich_vs_poor'),
+                ctx.path_to(ctx, 'OUT_FIGURES', 'comparison_agg_vs_het_100.png'),
+                ctx.path_to(ctx, 'OUT_FIGURES', 'comparison_agg_vs_het_p10.png'),
+                ctx.path_to(ctx, 'OUT_FIGURES', 'agg_rich_vs_poor.png'),
+                ctx.path_to(ctx, 'OUT_FIGURES', 'het_rich_vs_poor.png'),
             ],
             name='comparison'
         )
