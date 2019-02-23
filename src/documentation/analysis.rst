@@ -1,11 +1,17 @@
 .. _analysis:
 
 ************************************
-Figure derivation
+Analysis
 ************************************
 
-Documentation of the code in *src.analysis*. This is the core of the project. 
+Figure derivation
+===============
+
+Documentation of the code in *src.analysis*. In this file the evolution over time of the different real consumption measures for the poor and the rich are analysed.
 
 
 .. automodule:: src.analysis.8_evolution_time_comparison
     :members:
+
+
+

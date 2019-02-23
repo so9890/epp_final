@@ -1,112 +1,231 @@
-\documentclass[11pt, a4paper, leqno]{article}
-\usepackage{a4wide}
-\usepackage[T1]{fontenc}
+\documentclass{article}
 \usepackage[utf8]{inputenc}
-\usepackage{float, afterpage, rotating, graphicx}
-\usepackage{epstopdf}
-\usepackage{longtable, booktabs, tabularx}
-\usepackage{fancyvrb, moreverb, relsize}
-\usepackage{eurosym, calc}
-% \usepackage{chngcntr}
-\usepackage{amsmath, amssymb, amsfonts, amsthm, bm}
-\usepackage{caption}
-\usepackage{mdwlist}
-\usepackage{xfrac}
-\usepackage{setspace}
 \usepackage{xcolor}
-\usepackage{subcaption}
-\usepackage{minibox}
-% \usepackage{pdf14} % Enable for Manuscriptcentral -- can't handle pdf 1.5
-% \usepackage{endfloat} % Enable to move tables / figures to the end. Useful for some submissions.
-
-
-
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{soul}
+\usepackage[left=3cm, right=3cm]{geometry}
+\usepackage{hyperref}
 \usepackage{natbib}
-\bibliographystyle{rusnat}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{listings}
 
+%\usepackage[english]{babel}
+\renewcommand{\figurename}{\textbf{Fig.}}
+\usepackage[bf]{caption}
+%\usepackage{graphicx} %remove demo for real images! 
+\definecolor{mariam:p}{RGB}{0,130,90}
+\definecolor{sonja}{cmyk}{0.9,0,0.3,0}
+\usepackage{amssymb}
 
+%\usepackage{biblatex}
+%\addbibresource{bib.bib}
 
-
-\usepackage[unicode=true]{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=black,
-    anchorcolor=black,
-    citecolor=black,
-    filecolor=black,
-    menucolor=black,
-    runcolor=black,
-    urlcolor=black
-}
-
-
-\widowpenalty=10000
-\clubpenalty=10000
-
-\setlength{\parskip}{1ex}
-\setlength{\parindent}{0ex}
-\setstretch{1.5}
-
+\title{Research Project\\ Real Consumption Inequality and Monetary Policy \\ - the impact of heterogeneous inflation rates}
+\author{Dobkowitz S, Petrosyan M.}
+\date{\bf Work in progress, please do not quote\\ \today}
 
 \begin{document}
 
-\title{Real consumption inequality and monetary policy\thanks{Sonja Dobkowitz, University of Bonn. Email: \href{mailto:sonja.dobkowitz@barcelonagse.eu}{\nolinkurl{sonja [dot] dobkowitz [at] barcelonagse [dot] eu}}.}}
-
-\author{Sonja Dobkowitz}
-
-\date{
-{\bf Preliminary -- please do not quote} 
-\\[1ex] 
-\today
-}
-
 \maketitle
 
+%-------------------
+% Table of Contents
+%------------------
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+%--------------------
 
-\begin{abstract}
-	Some abstract here.
-\end{abstract}
-\clearpage
+%----------------------------
+%\part{Written paper}
+\section{Introduction}
+%\paragraph{Interest in inequality and MP} 
+In recent years social inequality has come to the attention of policymakers and economists alike. The increased interest of Central Banks around the globe in this topic \cite{mersch} has induced, inter alia, \cite{Coibion2017InnocentInequality}  to analyse the impact of monetary policy shocks on distinct measures of inequality. Looking at inequality of CPI-deflated expenditure, income, and other variables they find that a contractionary monetary policy shock causes a persistent increase in inequality. \\
+%\paragraph{Theoretical argument why inflation heterogeneity matters.}
+It is common practice to deflate nominal variables using aggregate measures of price indices. 
+%\paragraph{1st argument.} 
+From a purely mathematical perspective using this real consumption variable to construct measures of inequality, for example, a Gini coefficient or the standard deviation gives the same degree of inequality as nominal consumption. \\
+%\paragraph{ Why deflate at all?} 
+This first consideration leads us to the question why we should care about real instead of nominal consumption when measuring inequality. Nominal measures carry information on two elements: the amount of goods consumed and their prices. Changes over time in consumption can thus be induced by changes in the prices or changes in the quantity. A rise in nominal consumption does therefore not per se allow to deduce a higher amount of goods consumed. It could merely be due to a rise in prices: Instead of concluding the household is better off the household is in fact poorer\footnote{When comparing consumption baskets along the income distribution nominal expenditures might be a better measure, one might want to argue, since it shows how much the household is able to spent. It also implicitly captures differences in quality that contribute to well-being. At the same time, prices might differ due to quantity discount, use of vouchers, price discrimination targeted at income groups leading to price differences but not to quality differences. These differences in prices are relevant to be filtered out when interested in inequality}.\\
+%\paragraph{2nd argument - comparison of real consumption. }
+As measuring inequality is concerned with a comparison along the cross-sectional dimension it is crucial to think about how best to express real consumption of distinct households to arrive at a sensible comparison. Deflating nominal consumption in period $t$ by a price index approximately gives a measure of the amount consumed in $t$ expressed in prices of the base period of the index. The implicit assumption when using an aggregate price index is that prices for different consumers have changed in the same way. This is a strong assumption and disproved by the literature as will be discussed later. 
+ Assume, for the moment, that richer households choose a consumption bundle featuring lower household-specific inflation. In this case, deflation using an aggregate price index will lead to a lower amount consumed expressed in prices of the base period. This unjustifiably lowers measured inequality. 
+%Therefore, employing an aggregate price index is biased when aiming at measuring consumption inequality.
+Household-specific inflation rates are crucial to derive correct measures of the amounts consumed. \\
+%\paragraph{Research question}
+\textbf{These considerations motivate to test whether considering real consumption inequality makes a difference in, first, the evolution of consumption inequality in the US and, second, the effect of monetary policy shocks on real consumption inequality. }
+\\
+%\paragraph{Outlook on what we do} 
+To answer these questions we construct our alternative measure of consumption inequality in the US using Consumer Expenditure survey (CEX) and Consumer Price Index (CPI) data both coming from the Bureau of Labour Statistics (BLS) in the US. This new measure will be contrasted to the standard measure with an aggregate price index. In a second analysis we will  derive impulse response functions for both measures using the monetary policy shock series derived by \cite{Coibion2017InnocentInequality} in the well-known \cite{Romer2004AImplications} fashion. To this end we perform a local projection analysis. Furthermore, taking potential asymmetries of the effects into account we also run a model that separates contractionary and expansionary monetary policy actions. Results are compared thereafter.  
+\\
+%\paragraph{Why we focus on consumption}
+ We decided to focus on consumption as a measure of well-being for several reasons. Firstly, as discussed by \cite{AttanasioO.2016ConsumptionInequality} what matters for a hypothetical social planner and what is under focus of economists are the variables entering the utility functions of economic agents: consumption and leisure.  Secondly, \cite{Meyer2013ConsumptionRecession} show a substantial discrepancy between consumption and income during the Great Recession. While wealthy households were able to smooth away negative shocks to income, less well-off credit constrained households were not able to do so.  As will be discussed later, we think the lack of opportunity to draw on credit, or better, to insure, is an essential part of inequality and should be captured by the measure. 
+ %In addition, we think it is not sensible to perform the exercise presented here on income. Deflating nominal income with different price indices would yield a measure of how many of the bundles consumed today the household's income could buy, without providing a relevant measure of comparison of  differences in the "utility" that can be achieved by different income groups.  \textcolor{sonja}{tbc.}
+\\
+%\paragraph{evidence on inflation heterogeneity}
+Ongoing research has found relevant heterogeneity in household-specific inflation rates. \cite{Kaplan2017InflationLevel}, for instance, find a 6.2 to 9.0 percentage point inter-quartile difference in household-specific inflation rates in the period from  2004 to 2013 using scanner data. \cite{Hobijn2005INFLATIONSTATES} compare inflation rates for households below the official Census Bureau poverty threshold  to inflation of the rest of the income distribution using the same product category price indices from the BLS that we will use. They find small differences on average but significant differences in certain periods. %This study uses price indices of broader product categories (item strata) thereby accepting the assumption that all households consume the same combination of goods within each stratum.
+%\cite{CrawfordDistributionalInflation} contrast inflation rates of different percentiles of the income distribution to the aggregate measure of inflation in the UK and document relevant deviations: the highest share of households with an inflation rate within one percentage point of the average was 65 percent in 1994.  \\
+\cite{Cage2002ConstructingMethods}, focus on estimation of inflation experienced by different groups of population (both across consumption distribution percentiles and geographical segregation) between different time periods.
+Since price changes may include changes in relative prices of necessities and luxury goods, which have larger shares in the budget of low and high income households respectively, price indexes will vary systematically between the two groups. Combining data on dis-aggregate, item-level indices and nominal expenditures, they are able to construct household-specific price indices that act as bounds for changes in real costs of living. They find that price indices reflecting changes in cost of consumption between 1987 and 1991; and 1981 and 1991 were generally lower for low-consumption than for high-consumption households.% They conclude that inflation between those time periods was \textit{pro-poor}. 
+This evidence on inflation heterogeneity across households underlines the relevance of answering this paper's research question.
+\\
+%\paragraph{literature on inequality measures considering inflation heterogeneity} 
+While there  has been a growing body of research on inflation heterogeneity across the income distribution, only a few studies exist that take this into account when measuring real inequality. Among those, \cite{Crawford2002DistributionalInflation} study the impact  of ignoring heterogeneous inflation on measuring changes in income inequality for the UK from 1977 to 2000.  \cite{Attanasio2016ConsumptionInequality} explore discrepancies between dynamics of income and consumption inequality. They further discuss the usage of a common price index for the computation of quantities consumed, that is real consumption. They argue that a distinction in prices faced by different consumers may arise from two potential sources. First, different categories of goods may occupy different shares of total consumption for different income groups. Second, prices for more homogeneous goods can vary across locations, or within location depending on, for instance, shopping frequency. %Overall, if prices of goods most relevant for a low-income group rise less relative to prices of a high-income group, then using a common deflator would lead to overestimation of the measure of inequality. 
+While the most detailed data on prices available to us, i.e. price indices on item stratum level, does not allow us to account for differences in prices of homogeneous goods, we are able to  tackle the first problem of  basket composition on household level. 
+\\ 
+ In sum, inflation inequality is stronger when allowing consumption within item strata to vary. Therefore, we reckon that a more granular measure of household-specific price indices would improve the analysis. Still, the analysis presented here constitutes an improvement to the usual measures of consumption inequality. 
+\\
+To the best of our knowledge this is the first study that investigates the effects of monetary policy shocks on real consumption inequality taking heterogeneous inflation rates into account. In the context of analysing the effects of monetary policy the use of household-specific inflation rates is especially important. For the existence of different inflation rates along the income distribution points to systematically different degrees of price stickiness. 
+Varying degrees of price adjustment will lead to a different transmission of monetary policy. General equilibrium effects will induce a stronger adjustment via prices and less via quantities. This is likely to shape other transmission channels of inequality as, for instance, heterogeneous marginal propensities to consume along the income distribution.
+The hypothesis of price stickiness varying with the income distribution was recently analysed by \cite{Cravino2018PricePolicy} using the same data set that we are equipped with. They find a hump-shaped relationship of consumption-bundle price stickiness and income: where the middle-income group faces the highest degree of price flexibility.
+%\paragraph{Outline}
+The remainder of the paper is organized as follows: Section \ref{data} describes the data. Section \ref{method} derives and discusses our measure. A comparison of the standard are presented in section \ref{res1}. Section \ref{shocks} describes the estimation of impulse response functions using local projection. In section \ref{res2} the results are represented. Section \ref{con} concludes.
 
-\section{Introduction} % (fold)
-\label{sec:introduction}
-
-If you are using this template, please cite this item from the references: \citet{GaudeckerEconProjectTemplates}
-
-%\citet{Schelling69} example in the code is taken from \citet{StachurskiSargent13}
-
-%The decision rule of an agent is the following:
-%\input{formulas/decision_rule}
-
-%\begin{figure}
- %   \caption{Segregation by cycle in the baseline \citet{Schelling69} model as in the \%citet{StachurskiSargent13} example}
-    
- %   \includegraphics[width=\textwidth]{../../out/figures/schelling_baseline}
-
-%\end{figure}
-
-
-%\begin{figure}
- %   \caption{Segregation by cycle in the baseline \citet{Schelling69} model, limiting the number of potential moves per period to two}
-    
-  %  \includegraphics[width=\textwidth]{../../out/figures/schelling_max_moves_2}
-
-%\end{figure}
-
-% section introduction (end)
+%----MAIN---------
+%-------Data------
+\section{Data}\label{data}
+%\paragraph{CPI data} 
+To derive household-specific price indices we employ item stratum specific CPIs coming from the BLS. These raw data are themselves indices, i.e. already aggregated relative price changes on item stratum level. This is the most detailed price information publically available. The BLS used a modified Laspeyres index formula until January 1999 and a geometric mean index formula afterwards to derive the so-called price relatives (i.e. measures of short term price changes). These price relatives are calculated for 211 item strata in 38 index areas, thus for 8.108 item-area combinations and then used to derive basic indices (i.e. longer run price changes). Finally, item stratum indices are calculated using a Laspeyres index formula. It can be shown that consistent application of a Laspeyres index formula in two stages is equivalent to a one step procedure\footnote{ See \url{http://www.ilo.org/public/english/bureau/stat/download/cpi/corrections/chapter17.pdf}}. For the indices based on geometric aggregation after January 1999 we take this to be approximately true but further investigations need to be done. \\
+We will therefore consider the CPI data as Laspeyres indices: 
+\begin{align}\label{stratum_ix}
+   IX^s_{[b^s,t]}= \frac{\sum_{i\in s} \hat{q}_{i,b^s}p_{i,t}}{\sum_{i\in s} \hat{q}_{i,b^s}p_{i,b^s}}
+\end{align}
+where s identifies the item stratum, b and t denote periods, and $\hat{q}_{i,a}$ is the estimated weight of item i in stratum s where expenditures for weight construction are collected in period a, the reference period.\\
+Weight reference periods are updated every two years since January 2002. Indices based on different reference periods are then linked to account for the change in weights. 
+\\
+%\paragraph{\textcolor{green}{CEX data}} 
+We retrieve the data on household expenditures from the CEX data set. BLS conducts the survey of households that are representative for the US population each month. The households report consumption and expenditures, alongside with other consumer unit characteristics, every quarter for five quarters, of which the results of the first survey 
+%are used for pre-sampling purposes and 
+are not reported in the CEX series.  The survey consists of two parts, the Interview Survey and the Diary Survey, with the former designed to collect data on large and recurring expenditures (rent, utilities et cetera) and the latter providing more detailed information (where surveyees record each shopping trip and items purchased)  on a subsample of small, frequently purchased goods (BLS Handbook, 2016. As in \cite{Coibion2017InnocentInequality}, we use the data from the Interview Survey. The size of the cross section each month varies from 1500  to 2500 units. Reported expenditures of each consumer unit pertain to the three months prior to the interview month. In addition, the survey collects information pertaining family income, changes in assets and liabilities and demographic and economics characteristics of family members. Consumer units answer to this set of questions only during their first and last interview, with the reference period covering the previous twelve months. It should be noted that the records in the CEX data are akin to profit and loss statements, meaning expenditures are assigned to the period when purchases have been made, regardless of actual cash payments.  
 
 
+%-----Analysis 2----
+\section{Methodology}
+\subsection{Constructing a measure of real consumption inequality}\label{method}
+As described in section \ref{data} the CPI data set provides us with information on item stratum-specific indices $IX^s_{[b,t]}$ where base periods of stratum-specific indices might differ. %Therefore, when averaging over item strata we have to express each index in a common base period. 
+The aggregate household-specific index following chapter 17 of the BLS handbook on CPI construction \citep{BureauofLaborStatisticsBLSIndex} is then given by a Laspeyres aggregation:
+\begin{align}\label{agg_index_hh}
+    IX^h_{[z,t]}= IX^h_{[z,v]}\frac{\sum_{s\in S}AW^h_{\beta,s}IX^s_{[b^s,t]}}{\sum_{s\in S}AW^h_{\beta,s}IX^s_{[b^s,v]}}=IX^h_{[z,v]}\sum_{s\in S}w^h_{\beta,s}\frac{IX^s_{[b^s,t]}}{IX^s_{[b^s,v]}},
+\end{align}
+where 
+\begin{align*}
+    w^h_{\beta,s}= \frac{AW^h_{\beta,s} IX^s_{[b^s,v]}}{\sum_{s\in S}AW^h_{\beta,s} IX^s_{[b^s,v]}},
+\end{align*}
+
+with $S = \{s_1,...,s_n\}$ denoting the set of item strata and $b^s$ their respective base period. $v$ refers to the period prior to changing the reference period $\beta$ when the weights $AW^h_{\beta,s}$ are determined.  Starting in January 2002 the BLS adjusts weights every two years mostly in January. %And the stratum weight $w^h_{\beta,s}$ is derived from household h's expenditure share in period $\beta$ on stratum s expressed in prices of the index's base period $b^s$: 
+
+The household-specific index weights $AW^h_{\beta,s}$ are calculated exploiting information on household expenditures from the CEX data set. Ideally, prices should be weighted by their quantity share in the consumption basket of some reference period. The data at hand gives nominal consumption, thus prices times quantities, both of a given period. To arrive at an estimate of consumed quantity we correct item stratum expenditure shares in reference period $\beta$ by the respective item stratum CPI:
+\begin{align*}
+    EXP^h_{\beta,s}&=\sum_{i\in s} p_{i,\beta}q^h_{i,\beta}  \\
+    AW^h_{\beta,s}&=  EXP^h_{\beta,s} \times (IX^s_{[b^s,\beta]})^{-1}
+    =\sum_{ i \in I}p_{i, b^s}\hat{q}^h_{i,\beta}.%\times \left(\sum_{s\in S} \frac{EXP^h_{t,s}}{IX^s_{[z,t]}} \right)^{-1}
+\end{align*}
+In words, the weights $AW$ are given by the quantity consumed in reference period $\beta$ expressed in prices of the stratum-specific base period $p_{b^s}$.
+
+Since our index of interest is such that it can be used to express quantities bought in period $\tau$ in prices of some base period $b$, we adjust the index weights every period to match the period when expenditures are observed\footnote{ Note that this is not a good measure of price movements when interested in examining the effect of monetary policy shocks on prices. The flexible weights are themselves subject to monetary policy shocks, i.e. how households adjust their behaviour to the shock. The effect will be the conglomerate of both effects: price and behavioural changes.  }. %, and in line with the standard Laspeyres index formula, where the weights are taken from the base period we set $\beta = t$.
+The formula in \ref{agg_index_hh} becomes  
+\begin{align*}
+    IX^h_{[z,t]}= IX^h_{[z,t-1]}\sum_{s\in S}w^h_{t,s}\frac{IX^s_{[b^s,t]}}{IX^s_{[b^s,t-1]}}
+\end{align*}
+The final household-specific index of interest in period $\tau$ for a base period $b$ is then given by
+\begin{align*}
+   \widetilde{IX}^h_{[b,\tau]}=\frac{IX^h_{[z,\tau]}}{IX^h_{[z,b]}}= \frac{\sum_{s\in S}w^h_{\tau,s}\frac{IX^s_{[b^s,\tau]}}{IX^s_{[b^s,\tau-1]}}}{\sum_{s\in S}w^h_{\tau,s}\frac{IX^s_{[b^s,b]}}{IX^s_{[b^s,\tau-1]}}}.
+\end{align*}
+The formula corresponds to a Paasche index as weights are taken from period $\tau$ and not from the base period. 
+
+Where the tilde indicates that the index does not use weights of base period $b$ as it is indirectly derived from underlying indices. 
+%\paragraph{Measure of consumption} 
+The measure of real household consumption we will use in the following is then given by 
+\begin{align}
+    C^{h,r}_{b,\tau}= \frac{C^{h,n}_{\tau,\tau}}{\widetilde{IX}^h_{[b,\tau]}}
+\end{align}
+Where the first subscript indicates the period of the prices used to express consumption. It is thus a measure of consumption in period $\tau$ expressed in prices of the base period $b$. Where the superscript $r$ refers to (approximately) real and the $n$ to nominal variables.
+
+%\paragraph{What weights to use?}
+For our first analysis, where we want to contrast inequality measured by real versus nominal expenditures, it is sensible to use current period weights to construct the respective indices. Using this as deflator will result in an approximate measure of the value of consumption today expressed in prices of the base period. 
+
+%---------Inequality measures----------------------------
+\subsection{Measures of inequality} 
+In line with \cite{Coibion2017InnocentInequality} we consider three different measures of inequality: the Gini coefficient, the standard deviation and the 90th-10th percentile differential, all measured at the cross section. 
+The Gini coefficient is especially sensitive to changes to the middle of the distribution while the 90th-10th percentile differential and the standard deviation are both affected by changes in the tails of the distribution. Changes in the middle are not captured. Although the absolute size of the standard deviation is not meaningful since it depends on the units the exercise \cite{Coibion2017InnocentInequality} perform is interested in comparisons of standard deviations over time, which again is a valid comparison.
+
+%\paragraph{Why deflation with a common price index is problematic}
+As hinted at in the introduction measuring inequality by use of variables deflated with a common price index is equivalent to measuring nominal inequality.
+
+ Consider the cross-sectional variance of the log of the  nominal variable $x_t$ deflated by the common CPI
+\begin{align*}
+    Var\left(\log\left(\frac{x_t}{CPI_t}\right)\right)= \frac{1}{N}\sum_{i=1}^{N}\left(\log\left(\frac{x_{t,i}}{CPI_t}\right)
+    -\frac{1}{N}\sum_{i=1}^N\log\left(\frac{x_{t,i}}{CPI_t}\right)\right)^2.
+\end{align*}
+Where the average can easily be rewritten as follows
+\begin{align*}
+    \frac{1}{N}\sum_{i=1}^N\log\left(\frac{x_{t,i}}{CPI_t}\right) = \left(\frac{1}{N}\sum_{i=1}^N\log\left(x_{t,i}\right)\right) - \log(CPI_t).
+\end{align*}
+Substituting this and manipulating the first log we find
+\begin{align*}
+    Var\left(\log\left(\frac{x_t}{CPI_t}\right)\right)= \frac{1}{N}\sum_{i=1}^{N}\left(\log(x_{t,i})-\log(CPI_t)-\left(\frac{1}{N}\sum_{i=1}^N\log\left(x_{t,i}\right)\right) + \log(CPI_t)\right)^2 = Var\left(\log(x_{i,t})\right).
+\end{align*}
+
+\subsection{Constructing consumption weights by income percentile}
+As in \cite{Cravino2018PricePolicy} we aggregate households according to their income on income percentile level. This allows us to combine the information from the CEX Interview and the Diary questionnaire. This cannot be done on household level since the two surveys are conducted on different samples. \\
+We compute weights anew for each period to best match the aggregate price index on household/percentile level. %As a side remark, these measures would suffer from mixing changes in the index substitution and price 
 
 
 
+%------Results1-----
+\section{Comparison 1: evolution of the inequality measures}\label{res1}
+\par \hspace{2em} In this section we compare the evolution of the measures of real consumption using the aggregate CPI as deflator and heterogeneous CPI as deflator, \ref{f1} and \ref{f2}, respectively. The following figures compare real consumptions defkated using the aggregate CPI and the heterogeneous CPI, for the rich, \ref{f3}, and the poor, \ref{f4}.
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{../../bld/out/figures/agg_rich_vs_poor}
+    \caption{Time series of real consumption by poor and rich with agrgegate CPI }
+    \label{f1}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{../../bld/out/figures/het_rich_vs_poor}
+	\caption{Time series of real consumption by poor and rich with heterogeneous CPI }
+	\label{f2}
+\end{figure}
+
+\begin{figure}
+	\centering
+    \includegraphics[scale=0.5]{../../bld/out/figures/comparison_agg_vs_het_100}
+	\caption{Time series comparison aggregate vs. heterogeneous CPI for rich}
+	\label{f3}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{../../bld/out/figures/comparison_agg_vs_het_p10}
+	\caption{Time series comparison aggregate vs. heterogeneous CPI for poor}
+	\label{f4}
+\end{figure}
+
+%-------Analysis 2-----
+\section{MP shocks and IRFs}\label{shocks}
+%-------Estimation-----
+
+%-----Results2 -------
+\section{Comparison 2: impact of MP shocks}\label{res2}
+
+%------Caveats-------
+\section{Caveats}
+
+%-----Conclusion-----
+\section{Conclusion}\label{con}
+
+%------------------------
+% References
+%------------------------
+
+\newpage
+\pagenumbering{Roman}
+%\printbibliography
 \bibliography{refs}
-
-
-
-% \appendix
-
-% The chngctr package is needed for the following lines.
-% \counterwithin{table}{section}
-% \counterwithin{figure}{section}
+\bibliographystyle{apa}
+%-----------------------------
 
 \end{document}
