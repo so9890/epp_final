@@ -1,100 +1,93 @@
-""" This file is to 
-    1) construct household percentiles of income distribution  
+"""Construct percentiles of income distribution.  
  
-    i)   Read in ITBI/ITII files. ITBI until 2004, startind from 2004 ITII, that's 
-         when they are first available.
-    ii)  Merge sampling weights from FMLI file. 
-    -----Tests for how many Consumer Units (CUs) have not reported income ------
-    iii) Derive income distribution percentiles. 
+Merge CEX data on income ('itbi') and sampling weights ('fmli'), 
+test for missing income data and extract pre-tax income for a given month. 
+Ensure there is only one year in the resulting data frame. Derive income 
+distribution and household-specific percentiles. Save data frame containing
+household id, sampling weights and percentile.
+
+Import:
+Function 'weights_percentiles' from 'functions.py' to calculate income 
+distribution function and assign percentile to households.
 
 """
-##############################################################################
 
 import pandas as pd
-#import numpy as np
 
-from src.data_management.data_functions.functions import  weights_percentiles
+from src.data_management.data_functions.functions import weights_percentiles
 from bld.project_paths import project_paths_join as ppj
 
-##############################################################################
+# -----------------------------------------------------------------------------
+## Load data and merge.
+# -----------------------------------------------------------------------------
 
 
-""" i) and ii) Read in data. """
+data = pd.read_csv(ppj("IN_DATA_CEX", "itbi961x.csv"))
+weights = pd.read_csv(ppj("IN_DATA_CEX", "fmli961x.csv"))[["NEWID", "FINLWT21"]]
 
-data = pd.read_csv(ppj('IN_DATA_CEX', 'itbi961x.csv'))
- 
-weights=pd.read_csv(ppj('IN_DATA_CEX','fmli961x.csv'))[['NEWID', 'FINLWT21']]
-# Note to m,yself
-# the data set weights only contains each CU once, thus, weights are the same for each quarter! Make sense as for each month within a quarter
-# the sample is the same , test: 
-# unique_weights =pd.unique(weights['NEWID'])
-    
-data=data.merge(weights, left_on= 'NEWID', right_on= 'NEWID', how= 'left')
+data = data.merge(weights, left_on="NEWID", right_on="NEWID", how="left")
 
 
-""" Tests.
+# -----------------------------------------------------------------------------
+## Test for missing values.
+# -----------------------------------------------------------------------------
 
-1) check whether all NEWID in data has been matched
 
- """
-
-if len( data[data['NEWID'].isin(weights['NEWID'])].index)==len(data.index):
+if len(data[data["NEWID"].isin(weights["NEWID"])].index) == len(data.index):
     print("Length of data matches. All CUs in data got a sampling weight.")
 else:
     print("Error: There are CUs without weight.")
-  
-    
-""" 2) check how many households will be missing due to no income reported."""
 
-if len(pd.unique(data['NEWID']))==len(pd.unique(data[data['UCC']==980000]['NEWID'])):
-    print('All households reported income')
+
+if len(pd.unique(data["NEWID"])) == len(pd.unique(data[data["UCC"] == 980_000]["NEWID"])):
+    print("All households reported income")
 else:
-    s = len(pd.unique(data['NEWID']))-len(pd.unique(data[data['UCC']==980000]['NEWID']))
-    print(s, ' households did not report income and will be missing.' )
-   
-#################################################################################
-    
-""" iii) Derive income distribution percentiles for pre-tax income. 
-    
-Derive percentiles for each month separately. This 
-    
-"""
- 
-# Note to myself: the UCC-item 'Income before taxes' and 'Income after taxes' don't 
-# need to be divided by 4! a specified for other income variables in the ITBI/ITII files.
-      
-income_data_before_tax=data[data['UCC']==980000]
-    
-income_12_1995=income_data_before_tax[income_data_before_tax['REFMO']==12 ]
+    s = len(pd.unique(data["NEWID"])) - len(pd.unique(data[data["UCC"] == 980_000]["NEWID"]))
+    print(s, " households did not report income and will be missing.")
 
-""" Test. 
 
-Ensure there is only one year, i.e. all observations stem from the same month-year combination.
+# -----------------------------------------------------------------------------
+## Only keep pre-tax income information for one month.
+# -----------------------------------------------------------------------------
 
-"""
+
+income_data_before_tax = data[data["UCC"] == 980_000]
+income_12_1995 = income_data_before_tax[income_data_before_tax["REFMO"] == 12]
+
+
+# -----------------------------------------------------------------------------
+## Test for number of years in remaining data set.
+# -----------------------------------------------------------------------------
+
 
 class MyError(LookupError):
-    '''to be looked up.'''
+    """Define an error message to be printed in case there are several years."""
 
 
-if len(pd.unique(income_12_1995['REFYR']))==1:
-    print('test passed: only one year')
+if len(pd.unique(income_12_1995["REFYR"])) == 1:
+    print("test passed: only one year")
 else:
-   raise MyError('test failed: several years although there should only be one!')
-  
+    raise MyError("test failed: several years although there should only be one!")
 
-""" Derive cummulative distribution function and percentiles. """
 
-d=income_12_1995
-d_percentiles = weights_percentiles(d)
-d_percentiles_12_1995 = d_percentiles[['NEWID','FINLWT21', 'Percentile']]
+# -----------------------------------------------------------------------------
+## Aplly function to derive cummulative distribution function and percentiles.
+# -----------------------------------------------------------------------------
 
+
+d_percentiles = weights_percentiles(income_12_1995)
+d_percentiles_12_1995 = d_percentiles[["NEWID", "FINLWT21", "Percentile"]]
+
+
+# -----------------------------------------------------------------------------
+## Save data set.
+# -----------------------------------------------------------------------------
 
 
 def save(file):
-    file.to_pickle(ppj("OUT_DATA_PERCENTILES","12_1995_percentiles"))
+    file.to_pickle(ppj("OUT_DATA_PERCENTILES", "12_1995_percentiles"))
+
 
 if __name__ == "__main__":
     file = d_percentiles_12_1995
     save(file)
-    
