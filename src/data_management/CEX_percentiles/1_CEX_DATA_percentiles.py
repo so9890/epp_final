@@ -54,22 +54,6 @@ else:
 income_data_before_tax = data[data["UCC"] == 980_000]
 income_12_1995 = income_data_before_tax[income_data_before_tax["REFMO"] == 12]
 
-
-# -----------------------------------------------------------------------------
-## Test for number of years in remaining data set.
-# -----------------------------------------------------------------------------
-
-
-class MyError(LookupError):
-    """Define an error message to be printed in case there are several years."""
-
-
-if len(pd.unique(income_12_1995["REFYR"])) == 1:
-    print("test passed: only one year")
-else:
-    raise MyError("test failed: several years although there should only be one!")
-
-
 # -----------------------------------------------------------------------------
 ## Aplly function to derive cummulative distribution function and percentiles.
 # -----------------------------------------------------------------------------

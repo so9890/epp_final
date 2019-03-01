@@ -19,8 +19,6 @@ def set_project_paths(ctx):
     pp["IN_DATA_CEX"] = "src/original_data/CEX_data"
     pp["IN_DATA_GRAPH"] = "src/original_data/for_graph"
     pp["IN_DATA_CON"] = "src/original_data/Concordance"
-   # pp["IN_MODEL_CODE"] = "src/model_code"
-   # pp["IN_MODEL_SPECS"] = "src/model_specs"
     pp["IN_DATA_CEX_EXP"] = "src/data_management/CEX_shares"
     pp["IN_DATA_CEX_PERCN"] = "src/data_management/CEX_percentiles"
     pp["IN_DATA_MNGM_CPI"] = "src/data_management/CPI_management"
@@ -37,11 +35,6 @@ def set_project_paths(ctx):
     #pp["OUT_ANALYSIS"] = f"{out}/out/analysis"
     pp["OUT_FINAL"] = f"{out}/out/final"
     pp["OUT_FIGURES"] = f"{out}/out/figures"
-    # OUT_MODEL_SPECS is only required for using Stata with JSON and
-    # can be safely deleted otherwise
-    #pp["OUT_MODEL_SPECS"] = f"{out}/src/model_specs"
-    #pp["OUT_TABLES"] = f"{out}/out/tables"
-
 
 
     # Convert the directories into Waf nodes.
