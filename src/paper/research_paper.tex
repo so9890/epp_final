@@ -17,9 +17,17 @@
 \definecolor{mariam:p}{RGB}{0,130,90}
 \definecolor{sonja}{cmyk}{0.9,0,0.3,0}
 \usepackage{amssymb}
-
-%\usepackage{biblatex}
-%\addbibresource{bib.bib}
+\usepackage{scalerel,stackengine}
+\stackMath
+\newcommand\reallywidehat[1]{%
+\savestack{\tmpbox}{\stretchto{%
+  \scaleto{%
+    \scalerel*[\widthof{\ensuremath{#1}}]{\kern-.6pt\bigwedge\kern-.6pt}%
+    {\rule[-\textheight/2]{1ex}{\textheight}}%WIDTH-LIMITED BIG WEDGE
+  }{\textheight}% 
+}{0.5ex}}%
+\stackon[1pt]{#1}{\tmpbox}%
+}
 
 \title{Research Project\\ Real Consumption Inequality and Monetary Policy \\ - the impact of heterogeneous inflation rates}
 \author{Dobkowitz S, Petrosyan M.}
@@ -222,7 +230,6 @@ We compute weights anew for each period to best match the aggregate price index 
 
 \newpage
 \pagenumbering{Roman}
-%\printbibliography
 \bibliography{refs}
 \bibliographystyle{apa}
 %-----------------------------
