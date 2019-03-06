@@ -1,16 +1,16 @@
-"""Test functions used in project 'epp_all'."""
+"""Test functions used in project epp_all."""
 
 import sys
 import pandas as pd
 import pytest
 
-from functions import _cum_distribution, weights_percentiles
+from src.data_management.data_functions.functions import cum_distribution, weights_percentiles
 from numpy.testing import assert_array_almost_equal, assert_array_equal
 
 
 ###############################################################################
 
-"""1) Test function to derive cummulative distribution function '_cum_distribution'.
+"""1) Test function to derive cummulative distribution function 'cum_distribution'.
 
 This test asserts that the weights and percentages assigned to 
 each household are correct. It all derived percentages.
@@ -112,14 +112,14 @@ def expect_fun():
 
 # Run tests.
 def test_cum_distribution_weights(setup_fun, expect_fun):
-    calc_distribution = _cum_distribution(**setup_fun)
+    calc_distribution = cum_distribution(**setup_fun)
     assert_array_equal(
         calc_distribution["Cum_weights"].values, expect_fun["d"]["Cum_weights"].values
     )
 
 
 def test_cum_distribution_percentage(setup_fun, expect_fun):
-    calc_distribution = _cum_distribution(**setup_fun)
+    calc_distribution = cum_distribution(**setup_fun)
     assert_array_equal(
         calc_distribution["Percentage_below_equal"].values,
         expect_fun["d"]["Percentage_below_equal"].values,
@@ -127,14 +127,14 @@ def test_cum_distribution_percentage(setup_fun, expect_fun):
 
 
 def test_cum_distribution_point(setup_fun, expect_fun):
-    calc_distribution = _cum_distribution(**setup_fun)
+    calc_distribution = cum_distribution(**setup_fun)
     assert_array_equal(
         calc_distribution["Percentage_equal"].values, expect_fun["d"]["Percentage_equal"].values
     )
 
 
 def test_cum_distribution_equal_above(setup_fun, expect_fun):
-    calc_distribution = _cum_distribution(**setup_fun)
+    calc_distribution = cum_distribution(**setup_fun)
     assert_array_almost_equal(
         calc_distribution["Percentage_equal_above"].values,
         expect_fun["d"]["Percentage_equal_above"].values,

@@ -3,20 +3,14 @@
 1) Percentiles:
     
 'weights_percentiles'
-                      -- used in '1_CEX_DATA_percentiles.py' to derive income 
+                      - used in '1_CEX_DATA_percentiles.py' to derive income 
                          percentiles. 
 '_cum_distribution'  
-                      -- used in function 'weights_percentiles' to derive cummu-
+                      - used in function 'weights_percentiles' to derive cummu-
                          lative income distribution and probability density function.
 '_percentiles'        
-                      -- used in 'weights_percentiles' to assign households to 
+                      - used in 'weights_percentiles' to assign households to 
                          percentiles of income distribution.
-
-2) Quarterly CPI data
-    
-'_quarter_collapse'   
-                      --  used in '4_CPI_concordance_merge.py' to assign quarters 
-                          and collapse price data on quarterly level.
 
 """
 
@@ -33,12 +27,11 @@ def weights_percentiles(d):
     Return data set that assigns each household id the corresponding percentile.
     
     Arguments:       
-    d -- data set
+    d - data set
 
     """
-    
-    d_distribution = _cum_distribution(d)
-    d_sorted = _percentiles(d_distribution)
+    d_distribution = cum_distribution(d)
+    d_sorted = percentiles(d_distribution)
 
     return d_sorted
 
@@ -46,17 +39,16 @@ def weights_percentiles(d):
 ###############################################################################
 
 
-def _cum_distribution(d):
+def cum_distribution(d):
     """Calculate cummulative distribution function.
     
     Return sorted data set with cummulative weights, the cummulative distribution 
     function, and probability density function.
     
     Arguments:
-    d -- data set containing sampling weights and income for a given month-year
+    d - data set containing sampling weights and income for a given month-year
     
     """
-    
     d_sorted = d.sort_values("VALUE", na_position="first")
     d_sorted.index = range(len(d_sorted))
     d_sorted["Cum_weights"] = ""
@@ -110,17 +102,16 @@ def _cum_distribution(d):
 ###############################################################################
 
 
-def _percentiles(d_sorted):
+def percentiles(d_sorted):
     """Calculate household-specific percentiles. 
     
     Household-specific percentiles are derived from the cummulative distribution 
     and probability density function.     
     
     Arguments:
-    d -- data set resulting from the function '_cum_distribution'.
+    d - data set resulting from the function '_cum_distribution'.
     
     """
-    
     d_sorted["Percentile"] = ""
     start = 0
 

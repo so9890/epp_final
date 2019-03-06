@@ -174,7 +174,7 @@ print(
     len(UCC_u) - 1,
     "unique UCCs in the concordance file, and",
     len(dups.UCC.unique()),
-    "are reported more then once.",
+    "are reported more than once.",
 )
 
 
