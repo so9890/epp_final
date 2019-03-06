@@ -4,7 +4,7 @@ import sys
 import pandas as pd
 import pytest
 
-from functions import _cum_distribution, weights_percentiles
+from data_function.functions import _cum_distribution, weights_percentiles
 from numpy.testing import assert_array_almost_equal, assert_array_equal
 
 

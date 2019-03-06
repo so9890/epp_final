@@ -49,3 +49,15 @@ Documentation 6_CEX_CPI_calculations
 
 .. automodule:: src.data_management.CEX_CPI_calculations.6_CEX_CPI_calculations
     :members:
+
+Documentation functions
+=======================
+
+.. automodule:: src.data_management.data_functions.functions
+    :members:
+
+Documentation test_CEX_DATA
+===========================
+
+.. automodule:: src.data_management.data_functions.test_CEX_DATA
+    :members:

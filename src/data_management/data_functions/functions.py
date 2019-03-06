@@ -36,6 +36,7 @@ def weights_percentiles(d):
     d -- data set
 
     """
+    
     d_distribution = _cum_distribution(d)
     d_sorted = _percentiles(d_distribution)
 
@@ -55,6 +56,7 @@ def _cum_distribution(d):
     d -- data set containing sampling weights and income for a given month-year
     
     """
+    
     d_sorted = d.sort_values("VALUE", na_position="first")
     d_sorted.index = range(len(d_sorted))
     d_sorted["Cum_weights"] = ""
@@ -118,6 +120,7 @@ def _percentiles(d_sorted):
     d -- data set resulting from the function '_cum_distribution'.
     
     """
+    
     d_sorted["Percentile"] = ""
     start = 0
 
