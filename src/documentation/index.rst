@@ -5,7 +5,7 @@
 
 
 Welcome to the Real consumption inequality and monetary policy project's documentation!
-================================================================================================
+=======================================================================================
 
 .. toctree::
     :maxdepth: 2

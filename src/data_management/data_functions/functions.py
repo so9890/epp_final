@@ -1,33 +1,19 @@
-"""Functions of project.
-
-1) Percentiles:
-    
-'weights_percentiles'
-                      - used in '1_CEX_DATA_percentiles.py' to derive income 
-                         percentiles. 
-'_cum_distribution'  
-                      - used in function 'weights_percentiles' to derive cummu-
-                         lative income distribution and probability density function.
-'_percentiles'        
-                      - used in 'weights_percentiles' to assign households to 
-                         percentiles of income distribution.
-
-"""
+"""Functions of project."""
 
 # -----------------------------------------------------------------------------
-## 1) Percentiles
+## Percentiles
 # -----------------------------------------------------------------------------
 
 
 def weights_percentiles(d):
     """Calculate the percentile of each household.
     
-    1) Derive cummulative distribution and probibility distribution functions.
-    2) Assign percentiles to each household.
+    First, derive cummulative distribution and probibility distribution functions.
+    Second, assign percentiles to each household.
     Return data set that assigns each household id the corresponding percentile.
     
     Arguments:       
-    d - data set
+        d - data set
 
     """
     d_distribution = cum_distribution(d)
@@ -46,7 +32,7 @@ def cum_distribution(d):
     function, and probability density function.
     
     Arguments:
-    d - data set containing sampling weights and income for a given month-year
+        d - data set containing sampling weights and income for a given month-year
     
     """
     d_sorted = d.sort_values("VALUE", na_position="first")
@@ -109,7 +95,7 @@ def percentiles(d_sorted):
     and probability density function.     
     
     Arguments:
-    d - data set resulting from the function '_cum_distribution'.
+        d - data set resulting from the function '_cum_distribution'.
     
     """
     d_sorted["Percentile"] = ""

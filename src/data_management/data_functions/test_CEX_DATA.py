@@ -8,8 +8,6 @@ from src.data_management.data_functions.functions import cum_distribution, weigh
 from numpy.testing import assert_array_almost_equal, assert_array_equal
 
 
-###############################################################################
-
 """1) Test function to derive cummulative distribution function 'cum_distribution'.
 
 This test asserts that the weights and percentages assigned to 
@@ -141,10 +139,7 @@ def test_cum_distribution_equal_above(setup_fun, expect_fun):
     )
 
 
-######################################################################
-
-
-"""2) Test function that assignes percentiles '_percentiles'. 
+"""2) Test function that assignes percentiles 'percentiles'. 
 
 To do this, it is enough to test the cummulative function 'weights_percentiles'
 since it only consists of two functions, '_cum_distribution' and '_percentiles', 
