@@ -1,4 +1,4 @@
-"""Preparing CPI data for merge with concordance files.
+"""Prepar CPI data for merger with concordance files.
 
 Read in data and save into one CPI data set. Clean data to only contain 
 US city average information, seasonally unadjusted and monthly data. Derive 
@@ -7,7 +7,8 @@ files. Drop too broad price categories, ie. those with 'SA' in item code. Use
 file 'ELIconcordance_NS.xls' to replace old CPI item codes (from 1988) with 
 those that are given in the concordance file which is based on 2015 codes.
 
-Save data set containing CPI data and concordance id.
+Save data set containing CPI data and concordance id as 'CPI_for_con' to 
+'bld/out/data/CPI_prepared'.
 
 """
 

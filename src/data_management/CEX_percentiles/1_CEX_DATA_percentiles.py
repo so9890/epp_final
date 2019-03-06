@@ -4,7 +4,8 @@ Merge CEX data on income ('itbi') and sampling weights ('fmli'),
 test for missing income data and extract pre-tax income for a given month. 
 Ensure there is only one year in the resulting data frame. Derive income 
 distribution and household-specific percentiles. Save data frame containing
-household id, sampling weights and percentile.
+household id, sampling weights and percentile to 'bld/out/data/CEX_percentiles'
+as '12_1995_percentiles'.
 
 Import:
 Function 'weights_percentiles' from 'functions.py' to calculate income 

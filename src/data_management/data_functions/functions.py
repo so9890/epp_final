@@ -1,16 +1,21 @@
 """Functions of project.
 
-Content:
-1) Percentiles
-'weights_percentiles' -- used in '1_CEX_DATA_percentiles.py' to derive income 
+1) Percentiles:
+    
+'weights_percentiles'
+                      -- used in '1_CEX_DATA_percentiles.py' to derive income 
                          percentiles. 
-'_cum_distribution'   -- used in function 'weights_percentiles' to derive cummu-
+'_cum_distribution'  
+                      -- used in function 'weights_percentiles' to derive cummu-
                          lative income distribution and probability density function.
-'_percentiles'        -- used in 'weights_percentiles' to assign households to 
+'_percentiles'        
+                      -- used in 'weights_percentiles' to assign households to 
                          percentiles of income distribution.
 
 2) Quarterly CPI data
-'_quarter_collapse'   --  used in '4_CPI_concordance_merge.py' to assign quarters 
+    
+'_quarter_collapse'   
+                      --  used in '4_CPI_concordance_merge.py' to assign quarters 
                           and collapse price data on quarterly level.
 
 """
@@ -146,33 +151,3 @@ def _percentiles(d_sorted):
         print("Percentile", p, "done!")
 
     return d_sorted
-
-
-# -----------------------------------------------------------------------------
-## 2) Quarterly CPI data
-# -----------------------------------------------------------------------------
-
-
-def _quarter_collapse(data):
-    """Identify quarter of observation and collapse on quarterly level. 
-    
-    Use the quarterly mean of the CPI value when collapsing data set.
-    Retrun data set on quarterly level.
-    
-    Arguments:
-    data -- CPI data on monthly level
-    
-    """
-    for j in range(0, 10, 3):
-        for i in range(1 + j, 4 + j, 1):
-            if i < 10:
-                data.loc[data["period"].str.contains("0" + str(i)), "quarter"] = 1 + j / 3
-            else:
-                data.loc[data["period"].str.contains(str(i)), "quarter"] = 1 + j / 3
-
-    # collapse dataset on series_id, year and quarter level
-    data_q = data.groupby(["series_id", "year", "quarter", "item_id"], as_index=False).agg(
-        {"value": "mean"}
-    )
-
-    return data_q

@@ -15,5 +15,4 @@ Welcome to the Real consumption inequality and monetary policy project's documen
     data_management
     analysis
     paper
-    library
     references

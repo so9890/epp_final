@@ -1,10 +1,13 @@
 """Calculate weighted expenditure on household level.
 
-Extract expenditures data on household level from 'mtbi' file for one 
+Extract expenditure data on household level from 'mtbi' file for one 
 month-year combination. Merge to percentiles derived in '1_CEX_DATA_percentiles.py'.
-Merge information on UCC from 'CE_dictionary.xlsx' and calculate weighted expenditures.
-Save data set containing sampling weights and weighted expenditures. NOTE: this is not
-yet agrgegated on percentile level.   
+Merge information on UCC (Universal Classification Codes), the item id in the CEX data,
+from 'CE_dictionary.xlsx' and calculate weighted expenditures.
+Save data set containing sampling weights and weighted expenditures to 
+'bld/out/data/CEX_weights_and_expenditures' as '12_1995_expenditures'.
+
+NOTE: this is not yet agrgegated on percentile level.   
 
 """
 
@@ -78,7 +81,7 @@ data_12_1995["Weighted_exp"] = data_12_1995["COST"] * data_12_1995["FINLWT21"]
 
 
 def save(file):
-    file.to_pickle(ppj("OUT_DATA_WEIGHTS_AND_EXPENDITURES", "12_1995_weights_and_expenditures"))
+    file.to_pickle(ppj("OUT_DATA_WEIGHTS_AND_EXPENDITURES", "12_1995_expenditures"))
 
 
 if __name__ == "__main__":

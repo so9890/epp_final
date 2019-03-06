@@ -1,12 +1,13 @@
-"""Prepare concordance filetaken from William Casey paper.
+"""Prepare concordance file taken from William Casey paper.
 
 Assign UCCs to item ids. Note, the data set is copied from a PDF making additional 
 cleaning steps necessary. Derive item id from ELI id. For duplicates in terms of 
 item stratum id and UCC use expenditure class. Clean concordance file for potential
 duplicates in terms of UCC.
 
-Return concordance file that matches each UCC to one item-stratum/expenditure
-class id that is given in the CPI data set.
+Return concordance file that matches a UCC to one item-stratum/expenditure class
+id that is given in the CPI data set, save file to 'bld/out/data/Concordance_prepared'
+as 'WC_con'.
 
 """
 

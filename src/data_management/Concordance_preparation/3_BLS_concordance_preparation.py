@@ -1,15 +1,16 @@
-"""Prepare BLS concordance file and merge to the prepared CPI file.
+"""Prepare BLS concordance file.
 
 Ensure item id in BLS concordance file 'concordance_BLS.xlsx' is on same 
-level as item id used in CPI data, ie. go derive item-stratum id from ELI. 
+level as item id used in CPI data, ie. derive item-stratum id from ELI. 
 Ensure that the concordance file does not contain duplicates in terms of UCCs 
 and item-stratum id. If UCCs are merged to different item-ids within the same 
 expenditure class match UCC to expenditure class. In case UCCs are matched to 
 different expenditure classes choose one arbitrarily. Expenditure class is in 
-price level hierarchie one step above item_stratum.
+price level hierarchie one step above item stratum.
 
 Return concordance file that matches each UCC to one item-stratum/expenditure
-class id that is given in the CPI data set.
+class id that is given in the CPI data set, save file to 'bld/out/data/Concordance_prepared'
+as 'bld/BLS_con'.
 
 """
 

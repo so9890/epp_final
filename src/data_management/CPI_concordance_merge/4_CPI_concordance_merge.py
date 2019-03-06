@@ -1,17 +1,14 @@
 """Merge CPI to concordance files.
 
-Merge CPI file to both concordance files each. Ensure no duplicates.
-Use function '_quarter_collapse' to bring CPI data on quarterly level.
-
-Save four CPI files with different concordance files: BLS and the one derived 
-from the William Casey paper. Two files on monthly and quarterly level each.
+Merge CPI file to both concordance files separately. Ensure no duplicates.
+Save the two resulting CPI files based on different concordance files to 
+'bld/out/data/CPI_and_CON'.
 
 """
 
 import pandas as pd
 import re
 
-from src.data_management.data_functions.functions import _quarter_collapse
 from bld.project_paths import project_paths_join as ppj
 
 
@@ -64,8 +61,8 @@ for s in dic:
 
     not_merged_item_in_CPI = not_merged_in_CPI[not_merged_in_CPI.item_stratum_non_merged]
 
-    # Non-merged item-strata were coded as an expenditure class in concordance file.
-    # It was not able to differentate between them as they had the same UCCs
+    # Non-merged item-strata were coded as an expenditure class in the concordance file.
+    # It was not possible to differentate between them as they had the same UCCs
     # in the concordance file.
 
     # ------------------------------------------------------------------------
@@ -124,29 +121,20 @@ for s in dic:
     )
 
     # ------------------------------------------------------------------------
-    ## Clean CPI file to only contain prices that could be merged to UCC codes.
+    ## Ensure UCC is a float variable.
     # ------------------------------------------------------------------------
 
     d_CPI_con.UCC = d_CPI_con.UCC.astype(float)
 
-    # ------------------------------------------------------------------------
-    ## Aggregate price data on quarterly level using the mean of the 3 months.
-    # ------------------------------------------------------------------------
-
-    d_CPI_q = _quarter_collapse(d_CPI_con)
 
     # ------------------------------------------------------------------------
     ## Save files.
     # ------------------------------------------------------------------------
+    
 
-    def save_con_WC_dataq(file):
-        file.to_pickle(ppj("OUT_DATA_CPI_CON", "CPI_q_" + str(s)))
-
-    def save_con_WC_data(file):
+    def save_con_data(file):
         file.to_pickle(ppj("OUT_DATA_CPI_CON", "CPI_m_" + str(s)))
 
     if __name__ == "__main__":
-        dataq = d_CPI_q
         datam = d_CPI_con
-        save_con_WC_dataq(dataq)
-        save_con_WC_data(datam)
+        save_con_data(datam)
