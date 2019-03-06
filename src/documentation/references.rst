@@ -4,5 +4,5 @@
 References
 **********
 
-.. bibliography:: ../paper/refs.bib
-   :style: plain
+.. bibliography:: refs.bib
+   :enumtype: upperroman

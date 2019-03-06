@@ -30,7 +30,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
     'sphinxcontrib.bibtex',
-    "sphinx.ext.mathjax"
+    "sphinx.ext.mathjax",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -187,12 +187,9 @@ latex_elements = {
 
     # Additional stuff for the LaTeX preamble.
     #"preamble": "",
-    
-    #avoid empty pages for cuplex print
-    "extraclassoptions': 'openany,oneside"
 }
 
-
+latex_elements = { 'classoptions': ',openany,oneside'}
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
