@@ -1,8 +1,6 @@
 .. _references:
 
-**********
-References
-**********
-
-.. bibliography:: refs.bib
+.. bibliography:: ../paper/refs.bib
    :enumtype: upperroman
+   :all:
+   :style: plain

@@ -1,4 +1,15 @@
-"""Test functions used in project epp_all."""
+"""Test functions used in project epp_all.
+
+First, test function to derive cummulative distribution function 'cum_distribution'.
+This test asserts that the weights and percentages assigned to 
+each household are correct. It all derived percentages.
+
+Second, test function that assignes percentiles 'percentiles'. 
+To do this, it is enough to test the cummulative function 'weights_percentiles'
+since it only consists of two functions, 'cum_distribution' and 'percentiles', 
+of which the former is tested exhaustively above.
+
+"""
 
 import sys
 import pandas as pd
@@ -8,14 +19,11 @@ from src.data_management.data_functions.functions import cum_distribution, weigh
 from numpy.testing import assert_array_almost_equal, assert_array_equal
 
 
-"""1) Test function to derive cummulative distribution function 'cum_distribution'.
+# -----------------------------------------------------------------------------
+## Fix starting values and expected output.
+# -----------------------------------------------------------------------------
 
-This test asserts that the weights and percentages assigned to 
-each household are correct. It all derived percentages.
 
-"""
-
-# Fix starting values and expected output.
 @pytest.fixture
 def setup_fun():
 
@@ -107,8 +115,11 @@ def expect_fun():
 
     return out
 
+# -----------------------------------------------------------------------------
+## Test 1.
+# -----------------------------------------------------------------------------
 
-# Run tests.
+
 def test_cum_distribution_weights(setup_fun, expect_fun):
     calc_distribution = cum_distribution(**setup_fun)
     assert_array_equal(
@@ -139,13 +150,9 @@ def test_cum_distribution_equal_above(setup_fun, expect_fun):
     )
 
 
-"""2) Test function that assignes percentiles 'percentiles'. 
-
-To do this, it is enough to test the cummulative function 'weights_percentiles'
-since it only consists of two functions, '_cum_distribution' and '_percentiles', 
-of which the former is tested exhaustively above. 
-
-"""
+# -----------------------------------------------------------------------------
+## Test 2.
+# -----------------------------------------------------------------------------
 
 
 def test_weights_percentiles(setup_fun, expect_fun):

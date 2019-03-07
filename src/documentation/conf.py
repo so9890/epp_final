@@ -29,7 +29,7 @@ needs_sphinx = "1.1"
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
-    'sphinxcontrib.bibtex',
+    "sphinxcontrib.bibtex",
     "sphinx.ext.mathjax",
 ]
 

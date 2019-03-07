@@ -19,10 +19,10 @@ def build(ctx):
             target=[
                ctx.path_to(ctx,"OUT_DATA_CPI_CON", "CPI_m_{}".format(confile)),
               # ctx.path_to(ctx,"OUT_DATA_CPI_CON", "CPI_m_WC"),
-               ctx.path_to(ctx,"OUT_DATA_CPI_CON", "CPI_q_{}".format(confile)), 
+               #ctx.path_to(ctx,"OUT_DATA_CPI_CON", "CPI_q_{}".format(confile)), 
                #ctx.path_to(ctx,"OUT_DATA_CPI_CON", "CPI_q_BLS")
 
                ],
             append=confile,
-            name= ['CPI_m_{}'.format(confile), 'CPI_q_{}'.format(confile)]
+            name= ['CPI_m_{}'.format(confile)]
         )

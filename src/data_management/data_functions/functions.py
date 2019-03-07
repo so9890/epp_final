@@ -12,6 +12,9 @@ def weights_percentiles(d):
     Second, assign percentiles to each household.
     Return data set that assigns each household id the corresponding percentile.
     
+    Inputs:
+        builds on functions 'cum_distribution' and 'percentiles'
+        
     Arguments:       
         d - data set
 
@@ -30,6 +33,7 @@ def cum_distribution(d):
     
     Return sorted data set with cummulative weights, the cummulative distribution 
     function, and probability density function.
+
     
     Arguments:
         d - data set containing sampling weights and income for a given month-year
