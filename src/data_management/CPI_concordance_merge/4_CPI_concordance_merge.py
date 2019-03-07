@@ -23,7 +23,7 @@ d_CPI = pd.read_pickle(ppj("OUT_DATA_CPI_CLEARED", "CPI_for_con"))
 
 
 # -----------------------------------------------------------------------------
-## Loop to merge concordance files to CPI and also derive quarterly level data.
+## Loop to merge concordance files to CPI 
 # -----------------------------------------------------------------------------
 
 
@@ -123,6 +123,7 @@ for s in dic:
     # ------------------------------------------------------------------------
     ## Ensure UCC is a float variable.
     # ------------------------------------------------------------------------
+
 
     d_CPI_con.UCC = d_CPI_con.UCC.astype(float)
 

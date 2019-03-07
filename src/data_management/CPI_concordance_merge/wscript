@@ -11,17 +11,12 @@ def build(ctx):
             source='4_CPI_concordance_merge.py',
             deps=[
                   ctx.path_to(ctx,"OUT_DATA_CON_PREP", "{}_con".format(confile)),
-	          #ctx.path_to(ctx,'OUT_DATA_CON_PREP', 'BLS_con'),
 	          ctx.path_to(ctx, "OUT_DATA_CPI_CLEARED", "CPI_for_con")
 
 
                  ],
             target=[
                ctx.path_to(ctx,"OUT_DATA_CPI_CON", "CPI_m_{}".format(confile)),
-              # ctx.path_to(ctx,"OUT_DATA_CPI_CON", "CPI_m_WC"),
-               #ctx.path_to(ctx,"OUT_DATA_CPI_CON", "CPI_q_{}".format(confile)), 
-               #ctx.path_to(ctx,"OUT_DATA_CPI_CON", "CPI_q_BLS")
-
                ],
             append=confile,
             name= ['CPI_m_{}'.format(confile)]
